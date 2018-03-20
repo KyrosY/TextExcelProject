@@ -66,28 +66,28 @@ public class Spreadsheet implements Grid
 	@Override
 	public String getGridText()
 	{
-		String gridText = "   ";
-		gridText += "|";
+		String gridText = "   |";
 		for (int i = 65; i <= 76; i++) {
 			gridText += (char)i + "          |";	
 		}
 		gridText += "\n";
 		for(int i=0; i < grid.length; i++) {
+			gridText+=i+1;
 			if(i <10) 
 			{
-				gridText += i + "  |";
+				gridText +=  "  |";
 				for(int j=0; j<grid[i].length; j++) {
 					//should only display 10 characters
 					gridText += grid[i][j].abbreviatedCellText() + "|";
 				}
-			} else {
-				gridText += i + " |";
+			} else{ 
+				//double digit numbers only have one space afterwards
+				gridText += " |";
 				for(int j=0; j<grid[i].length; j++) {
 					//should only display 10 characters
 					gridText += grid[i][j].abbreviatedCellText() + "|";
 				}
 			}
-			
 			gridText += "\n";
 		}
 		return gridText;
