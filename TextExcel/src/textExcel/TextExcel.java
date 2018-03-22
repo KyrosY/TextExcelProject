@@ -2,9 +2,11 @@ package textExcel;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
-// Update this file with your own code.
-
+/* Kyros Yip
+ * 22 March 2018
+ * 1 Period
+ * TextExcel
+ */
 public class TextExcel
 {
 	

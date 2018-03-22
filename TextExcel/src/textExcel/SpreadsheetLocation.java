@@ -7,22 +7,22 @@ public class SpreadsheetLocation implements Location
 	private int colNumber;
 	private int rowNumber;
     @Override
+    //number of rows
     public int getRow()
     {
-        // TODO Auto-generated method stub
         return rowNumber;
     }
 
     @Override
+    //number of columns
     public int getCol()
     {
         // TODO Auto-generated method stub
         return colNumber;
     }
-    
+    //Location of the Spreadsheet (A to L and 1 to 20)
     public SpreadsheetLocation(String cellName)
     {
-        // TODO: Fill this out with your own code
     	colNumber = Character.toUpperCase(cellName.charAt(0))- 'A';
     	rowNumber = Integer.parseInt(cellName.substring(1, cellName.length())) - 1;
     }

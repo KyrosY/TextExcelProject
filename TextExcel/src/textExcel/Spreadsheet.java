@@ -20,12 +20,7 @@ public class Spreadsheet implements Grid
 	public String processCommand(String command)
 	{
 		String[] arr = command.split(" ");
-		if(command.length() <= 3)
-		{
-			SpreadsheetLocation location = new SpreadsheetLocation(command);
-			Cell valueAtLoc = grid[location.getCol()][location.getRow()];
-			return valueAtLoc.fullCellText();
-		} else if(arr[0].toLowerCase().equals("clear")) {
+		if(arr[0].toLowerCase().equals("clear")) {
 			if(arr.length == 2) {
 				clear(arr[1]);
 				return getGridText();
@@ -34,11 +29,16 @@ public class Spreadsheet implements Grid
 				clear();
 				return getGridText();
 			}
-		} else if (arr[2].toLowerCase().equals("hello")) {
-			
-		}
-			
-		return getGridText();
+		} else {
+			SpreadsheetLocation location = new SpreadsheetLocation(arr[0]);
+			if(command.length() == 3) {
+				grid[location.getRow()][location.getCol()] = new TextCell(arr[2]);
+				return getGridText();
+			} else {	
+				Cell valueAtLoc = grid[location.getRow()][location.getCol()];
+				return valueAtLoc.fullCellText();
+			} 
+		}	
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class Spreadsheet implements Grid
 	public Cell getCell(Location loc)
 	{
 		// TODO Auto-generated method stub
-		Cell typeOfCell = grid[loc.getCol()][loc.getRow()];
+		Cell typeOfCell = grid[loc.getRow()][loc.getCol()];
 		return typeOfCell;
 	}
 
@@ -68,12 +68,12 @@ public class Spreadsheet implements Grid
 	{
 		String gridText = "   |";
 		for (int i = 65; i <= 76; i++) {
-			gridText += (char)i + "          |";	
+			gridText += (char)i + "         |";	
 		}
 		gridText += "\n";
 		for(int i=0; i < grid.length; i++) {
 			gridText+=i+1;
-			if(i <10) 
+			if(i < 9) 
 			{
 				gridText +=  "  |";
 				for(int j=0; j<grid[i].length; j++) {
