@@ -4,9 +4,11 @@ package textExcel;
 
 public class Spreadsheet implements Grid
 {
+	//instance variables
 	private int cols = 12;
 	private int rows = 20;
 	private Cell[][] grid = new Cell[rows][cols];
+	//constructor
 	public Spreadsheet() 
 	{
 		for (int i=0; i<grid.length; i++) {
@@ -16,7 +18,7 @@ public class Spreadsheet implements Grid
 		} 
 	}
 	@Override
-	
+	//handles user commands
 	public String processCommand(String command)
 	{
 		String[] arr = command.split(" ",3);
@@ -40,6 +42,7 @@ public class Spreadsheet implements Grid
 		}	
 	}
 
+	//methods
 	@Override
 	public int getRows()
 	{
