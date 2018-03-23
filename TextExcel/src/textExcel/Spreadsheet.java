@@ -19,7 +19,7 @@ public class Spreadsheet implements Grid
 	
 	public String processCommand(String command)
 	{
-		String[] arr = command.split(" ");
+		String[] arr = command.split(" ",3);
 		if(arr[0].toLowerCase().equals("clear")) {
 			if(arr.length == 2) {
 				clear(arr[1]);
@@ -29,15 +29,14 @@ public class Spreadsheet implements Grid
 				clear();
 				return getGridText();
 			}
-		} else {
+		} else if(arr.length == 1){	
 			SpreadsheetLocation location = new SpreadsheetLocation(arr[0]);
-			if(command.length() == 3) {
-				grid[location.getRow()][location.getCol()] = new TextCell(arr[2]);
-				return getGridText();
-			} else {	
-				Cell valueAtLoc = grid[location.getRow()][location.getCol()];
-				return valueAtLoc.fullCellText();
-			} 
+			Cell valueAtLoc = getCell(location);
+			return valueAtLoc.fullCellText();
+		} else {
+			SpreadsheetLocation loca = new SpreadsheetLocation(arr[0]);	
+			grid[loca.getRow()][loca.getCol()] = new TextCell(arr[2]);
+			return getGridText();
 		}	
 	}
 

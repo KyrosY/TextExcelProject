@@ -10,18 +10,17 @@ public class TextCell implements Cell
 	// text for spreadsheet cell display, must be exactly length 10
 	public String abbreviatedCellText() 
 	{
-		if (text.length() > 10)
-		{
-			return text.substring(0, 11);
-		} else if(text.length() == 10) {
-			return text;
+		if (text.length() > 11) {
+			return text.substring(1, 11);
 		} else {
-			for (int i = text.length(); i <= 10; i++)
+			String onlyText = text.substring(1,text.length()-1);
+			for (int i = text.length(); i <= 11; i++)
 			{
-				text += " ";
+				onlyText += " ";
 			}
-			return text;
+			return onlyText;
 		}
+		
 	}
 	// text for individual cell inspection, not truncated or padded
 	public String fullCellText() 
