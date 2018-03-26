@@ -32,22 +32,25 @@ public class Spreadsheet implements Grid
 				clear();
 				return getGridText();
 			}
-		} else if(arr.length == 1){	
+		} else if(arr.length == 1) {	
 			Cell valueAtLoc = getCell(location);
 			return valueAtLoc.fullCellText();
 		}else if(arr[2].contains(".")) {
 			if (arr[2].contains("%")) {
-				
+				grid[location.getRow()][location.getCol()] = new PercentCell(arr[2]);
+				return getGridText();
 			} else {
 				grid[location.getRow()][location.getCol()] = new ValueCell(arr[2]);
 				return getGridText();
 			}
 		} else if(arr[2].contains("(") ) {
 			grid[location.getRow()][location.getCol()] = new FormulaCell(arr[2]);
+			return getGridText();
 		} else {
 			grid[location.getRow()][location.getCol()] = new TextCell(arr[2]);
 			return getGridText();
-		}	
+		}
+		//return getGridText();	
 	}
 
 	//methods

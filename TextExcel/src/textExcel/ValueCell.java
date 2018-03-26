@@ -10,18 +10,22 @@ public class ValueCell extends RealCell {
 		if (!value.contains(".")) {
 			value += ".0";
 		}
-		for(int i=value.length(); i>0; i++) {
-			while(zero = true) {
-				if(value.charAt(i)==0) {
+		for(int i=value.length(); i>0; i--) {
+			while (zero=true) {
+			if(value.charAt(i-1) == '0') {
 					value = value.substring(0,i);
 				} else {
 					zero = false;
-				}
+				} 
 			}
 		}
 		if (value.length() > 10) {
 			return value.substring(0, 10);
 		} else {
+			
+			for (int i = value.length(); i < 10; i++) {
+				value += " ";
+			}
 			return value;
 		}
 	}

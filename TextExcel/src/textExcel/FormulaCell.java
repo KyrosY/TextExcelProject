@@ -6,17 +6,16 @@ public class FormulaCell extends RealCell {
 		formula = input;
 	}
 	public String abbreviatedCellText() {
-		// TODO Auto-generated method stub
-	
+		return "4";
 	}
 
 	@Override
 	public String fullCellText() {
-		// TODO Auto-generated method stub
+		
 		return formula;
 	}
 	//will be overridden
 	public double getDoubleValue() {
 		return Double.parseDouble(formula);
-	
+	}
 }

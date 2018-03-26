@@ -14,8 +14,7 @@ public class TextCell implements Cell
 			return text.substring(1, 11);
 		} else {
 			String onlyText = text.substring(1,text.length()-1);
-			for (int i = text.length(); i <= 11; i++)
-			{
+			for (int i = text.length(); i <= 11; i++) {
 				onlyText += " ";
 			}
 			return onlyText;
