@@ -21,7 +21,8 @@ public class Spreadsheet implements Grid
 	//handles user commands
 	public String processCommand(String command)
 	{
-		String[] arr = command.split(" ",3);
+		String[] arr = command.split(" ", 3);
+		SpreadsheetLocation location = new SpreadsheetLocation(arr[0]);
 		if(arr[0].toLowerCase().equals("clear")) {
 			if(arr.length == 2) {
 				clear(arr[1]);
@@ -32,12 +33,19 @@ public class Spreadsheet implements Grid
 				return getGridText();
 			}
 		} else if(arr.length == 1){	
-			SpreadsheetLocation location = new SpreadsheetLocation(arr[0]);
 			Cell valueAtLoc = getCell(location);
 			return valueAtLoc.fullCellText();
+		}else if(arr[2].contains(".")) {
+			if (arr[2].contains("%")) {
+				
+			} else {
+				grid[location.getRow()][location.getCol()] = new ValueCell(arr[2]);
+				return getGridText();
+			}
+		} else if(arr[2].contains("(") ) {
+			grid[location.getRow()][location.getCol()] = new FormulaCell(arr[2]);
 		} else {
-			SpreadsheetLocation loca = new SpreadsheetLocation(arr[0]);	
-			grid[loca.getRow()][loca.getCol()] = new TextCell(arr[2]);
+			grid[location.getRow()][location.getCol()] = new TextCell(arr[2]);
 			return getGridText();
 		}	
 	}
