@@ -11,6 +11,7 @@ public class ValueCell extends RealCell {
 			value += ".0";
 		}
 		for(int i=value.length(); i>0; i--) {
+			/*
 			while (zero=true) {
 			if(value.charAt(i-1) == '0') {
 					value = value.substring(0,i);
@@ -18,6 +19,7 @@ public class ValueCell extends RealCell {
 					zero = false;
 				} 
 			}
+			*/
 		}
 		if (value.length() > 10) {
 			return value.substring(0, 10);

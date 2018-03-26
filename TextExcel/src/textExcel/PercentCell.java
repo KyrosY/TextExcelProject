@@ -12,7 +12,7 @@ public class PercentCell extends RealCell {
 			return percent.substring(0, 9) + "%";
 		} else {
 			truncPercent += "%";
-			for (int i = truncPercent.length(); i <= 10; i++) {
+			for (int i = truncPercent.length(); i < 10; i++) {
 				truncPercent += " ";	
 			}
 			return truncPercent;
@@ -21,10 +21,11 @@ public class PercentCell extends RealCell {
 
 	@Override
 	public String fullCellText() {
-		return percent.substring(0,percent.length());
+		Double decimal = getDoubleValue()/100;
+		return decimal + "";
 	}
 	//will be overridden
 	public double getDoubleValue() {
-		return Double.parseDouble(percent);
+		return Double.parseDouble(percent.substring(0,percent.length()));
 	}
 }
