@@ -26,6 +26,6 @@ public class PercentCell extends RealCell {
 	}
 	//will be overridden
 	public double getDoubleValue() {
-		return Double.parseDouble(percent.substring(0,percent.length()));
+		return Double.parseDouble(percent.substring(0,percent.length()-1));
 	}
 }
