@@ -22,56 +22,54 @@ public class Spreadsheet implements Grid
 	public String processCommand(String command)
 	{
 		String[] arr = command.split(" ", 3);
-		SpreadsheetLocation location = new SpreadsheetLocation(arr[0]);
+		
 		if(arr[0].toLowerCase().equals("clear")) {
 			if(arr.length == 2) {
 				clear(arr[1]);
-				return getGridText();
 			}
 			else {
 				clear();
-				return getGridText();
 			}
-		} else if(arr.length == 1) {	
-			Cell valueAtLoc = getCell(location);
-			return valueAtLoc.fullCellText();
-		}else if(arr[2].contains(".")) {
-			if (arr[2].contains("%")) {
-				grid[location.getRow()][location.getCol()] = new PercentCell(arr[2]);
-				return getGridText();
-			} else {
-				grid[location.getRow()][location.getCol()] = new ValueCell(arr[2]);
-				return getGridText();
-			}
-		} else if(arr[2].contains("(") ) {
-			grid[location.getRow()][location.getCol()] = new FormulaCell(arr[2]);
-			return getGridText();
+			
 		} else {
-			grid[location.getRow()][location.getCol()] = new TextCell(arr[2]);
-			return getGridText();
-		}
-		//return getGridText();	
+			SpreadsheetLocation location = new SpreadsheetLocation(arr[0]);
+			if(arr.length == 1) {	
+				Cell valueAtLoc = getCell(location);
+				return valueAtLoc.fullCellText();
+			
+			} else if(arr[2].contains(".")) {
+				if (arr[2].contains("%")) {
+					grid[location.getRow()][location.getCol()] = new PercentCell(arr[2]);
+
+				} else {
+					grid[location.getRow()][location.getCol()] = new ValueCell(arr[2]);
+				}
+			
+			} else if(arr[2].contains("(") ) {
+				grid[location.getRow()][location.getCol()] = new FormulaCell(arr[2]);
+
+			} else {
+				grid[location.getRow()][location.getCol()] = new TextCell(arr[2]);
+
+			}
 	}
+		return getGridText();
+}
 
 	//methods
 	@Override
-	public int getRows()
-	{
-		// TODO Auto-generated method stub
+	public int getRows() {
 		return rows;
 	}
 
 	@Override
-	public int getCols()
-	{
-		// TODO Auto-generated method stub
+	public int getCols() {
 		return cols;
 	}
 
 	@Override
 	public Cell getCell(Location loc)
 	{
-		// TODO Auto-generated method stub
 		Cell typeOfCell = grid[loc.getRow()][loc.getCol()];
 		return typeOfCell;
 	}

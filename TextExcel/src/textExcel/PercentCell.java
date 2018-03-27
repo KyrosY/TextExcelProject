@@ -1,18 +1,18 @@
 package textExcel;
 
 public class PercentCell extends RealCell {
-	private String percent;
 	
 	public PercentCell(String input) {
-		percent = input;
+		super(input);
 	}
 	public String abbreviatedCellText() {
+		String percent = getValue();
 		String truncPercent = percent.substring(0, percent.indexOf("."));
 		if(truncPercent.length() > 11) {
 			return percent.substring(0, 9) + "%";
 		} else {
 			truncPercent += "%";
-			for (int i = truncPercent.length(); i < 10; i++) {
+			while(truncPercent.length() < 10) {
 				truncPercent += " ";	
 			}
 			return truncPercent;
@@ -21,11 +21,11 @@ public class PercentCell extends RealCell {
 
 	@Override
 	public String fullCellText() {
-		Double decimal = getDoubleValue()/100;
+		Double decimal = getDoubleValue()*.01;
 		return decimal + "";
 	}
 	//will be overridden
 	public double getDoubleValue() {
-		return Double.parseDouble(percent.substring(0,percent.length()-1));
+		return Double.parseDouble(getValue().substring(0,getValue().length()-1));
 	}
 }

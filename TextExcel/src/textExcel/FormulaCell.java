@@ -1,9 +1,8 @@
 package textExcel;
 
 public class FormulaCell extends RealCell {
-	private String formula;
 	public FormulaCell (String input) {
-		formula = input;
+		super(input);
 	}
 	public String abbreviatedCellText() {
 		return "4";
@@ -12,10 +11,10 @@ public class FormulaCell extends RealCell {
 	@Override
 	public String fullCellText() {
 		
-		return formula;
+		return getValue();
 	}
 	//will be overridden
 	public double getDoubleValue() {
-		return Double.parseDouble(formula);
+		return Double.parseDouble(getValue());
 	}
 }
