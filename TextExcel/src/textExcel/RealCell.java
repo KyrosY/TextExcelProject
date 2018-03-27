@@ -18,4 +18,10 @@ public abstract class RealCell implements Cell {
 	public double getDoubleValue() {
 		return Double.parseDouble(value);
 	}
+	public String spaces(String numbers) {
+		while(numbers.length() < 10) {
+			numbers += " ";
+		}
+		return numbers;
+	}
 }

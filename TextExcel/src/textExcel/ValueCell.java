@@ -8,7 +8,7 @@ public class ValueCell extends RealCell {
 	
 	public String abbreviatedCellText() {
 		String value = getValue();
-
+/*
 		for(int i=value.length()-1;i>0; i--) {
 			if(value.charAt(i)==0) {
 				value = value.substring(0,i);
@@ -16,7 +16,7 @@ public class ValueCell extends RealCell {
 				i=0;
 			}
 		}
-		
+	*/	
 		if (!value.contains(".")) {
 			value += ".0";
 		}
@@ -24,10 +24,7 @@ public class ValueCell extends RealCell {
 			return value.substring(0, 10);
 		} 
 		else {
-			while(value.length()<10) {
-				value += " ";
-			}
-			return value;
+			return spaces(getDoubleValue() + "");
 		}
 		
 	}

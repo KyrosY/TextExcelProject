@@ -12,10 +12,8 @@ public class PercentCell extends RealCell {
 			return percent.substring(0, 9) + "%";
 		} else {
 			truncPercent += "%";
-			while(truncPercent.length() < 10) {
-				truncPercent += " ";	
-			}
-			return truncPercent;
+			
+			return spaces(truncPercent);
 		}
 	}
 
