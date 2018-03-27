@@ -17,9 +17,9 @@ public class ValueCell extends RealCell {
 			}
 		}
 		
-	//	if (!value.contains(".")) {
-		//	value += ".0";
-	//	}
+		if (!value.contains(".")) {
+			value += ".0";
+		}
 		if (value.length() > 10) {
 			return value.substring(0, 10);
 		} 
