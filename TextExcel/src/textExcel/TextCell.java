@@ -24,7 +24,7 @@ public class TextCell implements Cell
 	// text for individual cell inspection, not truncated or padded
 	public String fullCellText() 
 	{
-		return  text ;
+		return text;
 	}
 }
 

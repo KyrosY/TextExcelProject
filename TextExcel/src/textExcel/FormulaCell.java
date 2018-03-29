@@ -13,8 +13,9 @@ public class FormulaCell extends RealCell {
 		
 		return getValue();
 	}
-	//will be overridden
+	
 	public double getDoubleValue() {
-		return Double.parseDouble(getValue());
+		double x = 0;
+		return x;
+		}
 	}
-}

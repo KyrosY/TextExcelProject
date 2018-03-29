@@ -39,15 +39,15 @@ public class Spreadsheet implements Grid
 			
 			} else if(arr[2].contains("%")) {
 				grid[location.getRow()][location.getCol()] = new PercentCell(arr[2]);	
-			} else if(arr[2].contains("(") ) {
+			} else if(arr[2].contains("(") && !arr[2].contains("\"")) {
 				grid[location.getRow()][location.getCol()] = new FormulaCell(arr[2]);
-
 			} else  if(arr[2].contains("\"")) {
 				grid[location.getRow()][location.getCol()] = new TextCell(arr[2]);
 
 			} else {
 				grid[location.getRow()][location.getCol()] = new ValueCell(arr[2]);
 			}
+			
 	}
 		return getGridText();
 }
@@ -64,8 +64,7 @@ public class Spreadsheet implements Grid
 	}
 
 	@Override
-	public Cell getCell(Location loc)
-	{
+	public Cell getCell(Location loc) {
 		Cell typeOfCell = grid[loc.getRow()][loc.getCol()];
 		return typeOfCell;
 	}

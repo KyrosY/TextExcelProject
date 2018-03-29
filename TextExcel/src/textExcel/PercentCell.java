@@ -6,13 +6,11 @@ public class PercentCell extends RealCell {
 		super(input);
 	}
 	public String abbreviatedCellText() {
-		String percent = getValue();
-		String truncPercent = percent.substring(0, percent.indexOf("."));
+		String truncPercent = getValue().substring(0, getValue().indexOf("."));
 		if(truncPercent.length() > 11) {
-			return percent.substring(0, 9) + "%";
+			return getValue().substring(0, 9) + "%";
 		} else {
 			truncPercent += "%";
-			
 			return spaces(truncPercent);
 		}
 	}

@@ -8,15 +8,7 @@ public class ValueCell extends RealCell {
 	
 	public String abbreviatedCellText() {
 		String value = getValue();
-/*
-		for(int i=value.length()-1;i>0; i--) {
-			if(value.charAt(i)==0) {
-				value = value.substring(0,i);
-			} else {
-				i=0;
-			}
-		}
-	*/	
+	
 		if (!value.contains(".")) {
 			value += ".0";
 		}
