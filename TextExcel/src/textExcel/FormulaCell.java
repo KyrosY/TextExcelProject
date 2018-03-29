@@ -5,7 +5,7 @@ public class FormulaCell extends RealCell {
 		super(input);
 	}
 	public String abbreviatedCellText() {
-		return "4";
+		return getDoubleValue() + "";
 	}
 
 	@Override
@@ -15,6 +15,11 @@ public class FormulaCell extends RealCell {
 	}
 	
 	public double getDoubleValue() {
+		String formula = getValue();
+		String[] formulaSections = formula.split(" ");
+		for(int i=0; i<formulaSections.length; i++) {
+			
+		}
 		double x = 0;
 		return x;
 		}

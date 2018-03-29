@@ -36,11 +36,13 @@ public class Spreadsheet implements Grid
 			if(arr.length == 1) {	
 				Cell valueAtLoc = getCell(location);
 				return valueAtLoc.fullCellText();
-			
+				
 			} else if(arr[2].contains("%")) {
 				grid[location.getRow()][location.getCol()] = new PercentCell(arr[2]);	
+				
 			} else if(arr[2].contains("(") && !arr[2].contains("\"")) {
 				grid[location.getRow()][location.getCol()] = new FormulaCell(arr[2]);
+				
 			} else  if(arr[2].contains("\"")) {
 				grid[location.getRow()][location.getCol()] = new TextCell(arr[2]);
 
