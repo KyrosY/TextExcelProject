@@ -8,7 +8,7 @@ public class ValueCell extends RealCell {
 	
 	public String abbreviatedCellText() {
 		String value = getValue();
-	
+		//if the value is whole, it still prints as a double
 		if (!value.contains(".")) {
 			value += ".0";
 		}

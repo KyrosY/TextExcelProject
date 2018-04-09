@@ -20,7 +20,7 @@ public class PercentCell extends RealCell {
 		Double decimal = getDoubleValue()*.01;
 		return decimal + "";
 	}
-	//will be overridden
+	//changes the percent to a double
 	public double getDoubleValue() {
 		return Double.parseDouble(getValue().substring(0,getValue().length()-1));
 	}

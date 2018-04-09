@@ -5,7 +5,12 @@ public class FormulaCell extends RealCell {
 		super(input);
 	}
 	public String abbreviatedCellText() {
-		return getDoubleValue() + "";
+		if ((getDoubleValue() + "").length() > 10) {
+			return (getDoubleValue() + "").substring(0, 10);
+		} 
+		else {
+			return spaces(getDoubleValue() + "");
+		}
 	}
 
 	@Override
@@ -15,12 +20,25 @@ public class FormulaCell extends RealCell {
 	}
 	
 	public double getDoubleValue() {
-		String formula = getValue();
-		String[] formulaSections = formula.split(" ");
-		for(int i=0; i<formulaSections.length; i++) {
+		double value = 0;
+		String[] formulaParts = getValue().split(" ");
+		for(int i=1; i< formulaParts.length-1; i++) {
 			
+			if (formulaParts[i].equals("+")) {
+				value+= Double.parseDouble(formulaParts[i+1]);;
+				
+			} else if (formulaParts[i].equals("-")) {
+				value-= Double.parseDouble(formulaParts[i+1]);;
+				
+			} else if (formulaParts[i].equals("*")) {
+				value*= Double.parseDouble(formulaParts[i+1]);;
+				
+			} else if (formulaParts[i].equals("/")){
+				value/= Double.parseDouble(formulaParts[i+1]);;
+			} else {
+				value += Double.parseDouble(formulaParts[i]);
+			}
 		}
-		double x = 0;
-		return x;
-		}
+		return value;
 	}
+}
