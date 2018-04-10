@@ -31,8 +31,10 @@ public class Spreadsheet implements Grid
 			else {
 				clear();
 			}
-			
 		} else {
+			if(arr[0].equals("")) {
+				return "";
+			}
 			SpreadsheetLocation location = new SpreadsheetLocation(arr[0]);
 			//value at one cell
 			if(arr.length == 1) {	
@@ -50,7 +52,7 @@ public class Spreadsheet implements Grid
 				
 			} else {
 				grid[location.getRow()][location.getCol()] = new ValueCell(arr[2]);
-			}
+			} 
 			
 	}
 		return getGridText();

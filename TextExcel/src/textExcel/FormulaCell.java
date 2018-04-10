@@ -25,20 +25,38 @@ public class FormulaCell extends RealCell {
 		for(int i=1; i< formulaParts.length-1; i++) {
 			
 			if (formulaParts[i].equals("+")) {
-				value+= Double.parseDouble(formulaParts[i+1]);;
+				value+= Double.parseDouble(formulaParts[i+1]);
+				i++;
 				
 			} else if (formulaParts[i].equals("-")) {
-				value-= Double.parseDouble(formulaParts[i+1]);;
+				value-= Double.parseDouble(formulaParts[i+1]);
+				i++;
 				
 			} else if (formulaParts[i].equals("*")) {
-				value*= Double.parseDouble(formulaParts[i+1]);;
+				value*= Double.parseDouble(formulaParts[i+1]);
+				i++;
 				
 			} else if (formulaParts[i].equals("/")){
-				value/= Double.parseDouble(formulaParts[i+1]);;
+				value/= Double.parseDouble(formulaParts[i+1]);
+				i++;
 			} else {
 				value += Double.parseDouble(formulaParts[i]);
 			}
 		}
 		return value;
 	}
+	/*
+	public double operations(double operator1, String operand, double operator2) {
+		if (operand.equals("+")) {
+			operator1 += operator2;
+		} else if (operand.equals("-")) {
+			operator1 -= operator2;
+		} else if (operand.equals("*")) {
+			operator1 *= operator2;
+		} else if (operand.equals("/")){
+			operator1 /= operator2;
+		}
+		return operator1;
+		}
+		*/
 }
