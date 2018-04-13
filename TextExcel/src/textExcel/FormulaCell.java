@@ -41,7 +41,7 @@ public class FormulaCell extends RealCell {
 				i++;
 			} else {
 				value += Double.parseDouble(formulaParts[i]);
-			}
+			}//	else {
 		}
 		return value;
 	}
