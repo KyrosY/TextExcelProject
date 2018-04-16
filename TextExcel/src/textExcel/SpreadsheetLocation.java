@@ -19,8 +19,8 @@ public class SpreadsheetLocation implements Location
     }
     //Location of the Spreadsheet (A to L and 1 to 20)
     public SpreadsheetLocation(String cellName) {
-    	colNumber = Character.toUpperCase(cellName.charAt(0))- 'A';
-    	rowNumber = Integer.parseInt(cellName.substring(1, cellName.length())) - 1;
+    	colNumber = cellName.charAt(0)- 65;
+    	rowNumber = Integer.parseInt(cellName.substring(1)) - 1;
     }
 
 }

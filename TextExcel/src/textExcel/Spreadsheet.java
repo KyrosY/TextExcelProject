@@ -8,8 +8,7 @@ public class Spreadsheet implements Grid
 	private Cell[][] grid = new Cell[20][12];
 	
 	//constructor
-	public Spreadsheet() 
-	{
+	public Spreadsheet() {
 		for (int i=0; i<grid.length; i++) {
 			for (int j=0; j<grid[i].length; j++) {
 				grid[i][j] = new EmptyCell();
@@ -48,7 +47,8 @@ public class Spreadsheet implements Grid
 				grid[location.getRow()][location.getCol()] = new TextCell(arr[2]);
 				
 			} else if(arr[2].contains("(") ) {
-				grid[location.getRow()][location.getCol()] = new FormulaCell(arr[2]);
+				Spreadsheet sheet = new Spreadsheet();
+				grid[location.getRow()][location.getCol()] = new FormulaCell(arr[2], sheet);
 				
 			} else {
 				grid[location.getRow()][location.getCol()] = new ValueCell(arr[2]);
@@ -71,8 +71,8 @@ public class Spreadsheet implements Grid
 
 	@Override
 	public Cell getCell(Location loc) {
-		Cell typeOfCell = grid[loc.getRow()][loc.getCol()];
-		return typeOfCell;
+		return grid[loc.getRow()][loc.getCol()]; 
+		
 	}
 
 	@Override
