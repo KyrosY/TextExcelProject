@@ -17,8 +17,7 @@ public class Spreadsheet implements Grid
 	}
 	@Override
 	//handles user commands
-	public String processCommand(String command)
-	{
+	public String processCommand(String command){
 		String[] arr = command.split(" ", 3);
 		
 		if(arr[0].toLowerCase().equals("clear")) {
@@ -47,8 +46,7 @@ public class Spreadsheet implements Grid
 				grid[location.getRow()][location.getCol()] = new TextCell(arr[2]);
 				
 			} else if(arr[2].contains("(") ) {
-				Spreadsheet sheet = new Spreadsheet();
-				grid[location.getRow()][location.getCol()] = new FormulaCell(arr[2], sheet);
+				grid[location.getRow()][location.getCol()] = new FormulaCell(arr[2], this);
 				
 			} else {
 				grid[location.getRow()][location.getCol()] = new ValueCell(arr[2]);
@@ -71,8 +69,7 @@ public class Spreadsheet implements Grid
 
 	@Override
 	public Cell getCell(Location loc) {
-		return grid[loc.getRow()][loc.getCol()]; 
-		
+		return grid[loc.getRow()][loc.getCol()]; 		
 	}
 
 	@Override

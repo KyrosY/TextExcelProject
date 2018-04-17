@@ -1,8 +1,10 @@
 package textExcel;
 
 public class FormulaCell extends RealCell {
-	public FormulaCell (String input) {
+	Spreadsheet sheet;
+	public FormulaCell (String input, Spreadsheet sheet) {
 		super(input);
+		this.sheet = sheet;
 	}
 	public String abbreviatedCellText() {
 		if ((getDoubleValue() + "").length() > 10) {
@@ -22,18 +24,14 @@ public class FormulaCell extends RealCell {
 	public double getDoubleValue() {
 		double value = 0;
 		String[] formulaParts = getValue().split(" ");
-		if(formulaParts[1].toLowerCase().equals("sum")) {
+		if(formulaParts[1].toLowerCase().equals("sum") || formulaParts[1].toLowerCase().equals("avg")) {
 			String[] cellRef= formulaParts[2].split("-");
-			value = sum(cellRef[0], cellRef[1]);
-		} else if (formulaParts[1].toLowerCase().equals("avg")) {
-			String[] cellReference = formulaParts[2].split("-");
-			value = average(cellReference[0], cellReference[1]);
+			value = sumOrAverage(formulaParts[1], cellRef[0], cellRef[1]);
 		} else {
 			for(int j=1; j<formulaParts.length-1; j++) {
 				if(Character.isLetter(formulaParts[j].charAt(0))) {
-					Location loc = new SpreadsheetLocation(formulaParts[j]);
-					Cell[][] sheet;
-					formulaParts[j] = ((RealCell) sheet[loc.getRow()][loc.getCol()]).getDoubleValue() +"";	
+					SpreadsheetLocation loc = new SpreadsheetLocation(formulaParts[j]);
+					formulaParts[j] = ((RealCell) sheet.getCell(loc)).getDoubleValue() +"";	
 				}
 			}
 			value = Double.parseDouble(formulaParts[1]);
@@ -58,10 +56,25 @@ public class FormulaCell extends RealCell {
 		}
 		return val;
 		}
-	public double sum (String cell1, String cell2) {
-		return 0;
-	}
-	public double average(String cell1, String cell2) {
-		return 0;
-	}
+	public double sumOrAverage (String formula, String cell1, String cell2) {
+		double sum = 0;
+		double numberOfCells = 0;
+		SpreadsheetLocation locCell1 = new SpreadsheetLocation(cell1);
+		SpreadsheetLocation locCell2 = new SpreadsheetLocation(cell2);
+		if(locCell1.equals(locCell2)) {
+			return ((RealCell)sheet.getCell(locCell1)).getDoubleValue();
+		}
+			for(int i=locCell1.getRow(); i<=locCell2.getRow();i++) {
+				for(int j=locCell1.getCol(); j<=locCell2.getCol(); j++) {
+					sum+= ((RealCell)sheet[i][j]).getDoubleValue();
+					numberOfCells++;
+				}
+			}
+			if(formula.toLowerCase().equals("sum")) {
+				return sum;
+			} else {
+				return sum/numberOfCells;
+			}
+		}
+	
 }
