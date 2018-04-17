@@ -2,9 +2,11 @@ package textExcel;
 
 public class FormulaCell extends RealCell {
 	Spreadsheet sheet;
-	public FormulaCell (String input, Spreadsheet sheet) {
+	Cell[][] grid;
+	public FormulaCell (String input, Spreadsheet sheet, Cell[][] grid) {
 		super(input);
 		this.sheet = sheet;
+		this.grid=grid;
 	}
 	public String abbreviatedCellText() {
 		if ((getDoubleValue() + "").length() > 10) {
@@ -65,8 +67,9 @@ public class FormulaCell extends RealCell {
 			return ((RealCell)sheet.getCell(locCell1)).getDoubleValue();
 		}
 			for(int i=locCell1.getRow(); i<=locCell2.getRow();i++) {
-				for(int j=locCell1.getCol(); j<=locCell2.getCol(); j++) {
-					sum+= ((RealCell)sheet[i][j]).getDoubleValue();
+				for(int j=(locCell1.getCol()+65); j<=(locCell2.getCol()+65); j++) {
+					SpreadsheetLocation loca = new SpreadsheetLocation((char)j+i+""); 
+					sum+= ((RealCell)grid[loca.getRow()][loca.getCol()]).getDoubleValue();
 					numberOfCells++;
 				}
 			}
