@@ -46,7 +46,7 @@ public class Spreadsheet implements Grid
 				grid[location.getRow()][location.getCol()] = new TextCell(arr[2]);
 				
 			} else if(arr[2].contains("(") ) {
-				grid[location.getRow()][location.getCol()] = new FormulaCell(arr[2], this, grid);
+				grid[location.getRow()][location.getCol()] = new FormulaCell(arr[2], this);
 				
 			} else {
 				grid[location.getRow()][location.getCol()] = new ValueCell(arr[2]);
