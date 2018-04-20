@@ -1,12 +1,13 @@
 package textExcel;
 
+import java.util.ArrayList;
+
 public class FormulaCell extends RealCell {
-	Spreadsheet sheet;
+	Cell[][] grid;;
 	//Cell[][] grid;
-	public FormulaCell (String input, Spreadsheet sheet) {
+	public FormulaCell (String input, Cell[][] grid) {
 		super(input);
-		this.sheet = sheet;
-	//	this.grid=grid;
+		this.grid = grid;
 	}
 	public String abbreviatedCellText() {
 		if ((getDoubleValue() + "").length() > 10) {
@@ -32,8 +33,8 @@ public class FormulaCell extends RealCell {
 		} else {
 			for(int j=1; j<formulaParts.length-1; j++) {
 				if(Character.isLetter(formulaParts[j].charAt(0))) {
-					SpreadsheetLocation loc = new SpreadsheetLocation(formulaParts[j]);
-					formulaParts[j] = ((RealCell) sheet.getCell(loc)).getDoubleValue() +"";	
+					SpreadsheetLocation location = new SpreadsheetLocation(formulaParts[j]);
+					formulaParts[j] = ((RealCell) grid[location.getRow()][location.getCol()]).getDoubleValue()+"";	
 				}
 			}
 			value = Double.parseDouble(formulaParts[1]);
@@ -63,17 +64,16 @@ public class FormulaCell extends RealCell {
 		double numberOfCells = 0;
 		SpreadsheetLocation locCell1 = new SpreadsheetLocation(cell1);
 		SpreadsheetLocation locCell2 = new SpreadsheetLocation(cell2);
-		
-		if(locCell1.equals(locCell2)) {
-			return ((RealCell)sheet.getCell(locCell1)).getDoubleValue();
+		if(cell1 == cell2) {
+			sum+= ((RealCell)grid[locCell1.getRow()][locCell1.getCol()]).getDoubleValue();
+			numberOfCells = 1;
 		}
-			for(int i=locCell1.getRow(); i<=locCell2.getRow();i++) {
-				for(int j=(locCell1.getCol()+65); j<=(locCell2.getCol()+65); j++) {
-					SpreadsheetLocation loca = new SpreadsheetLocation((char)j+i+""); 
-				//	sum+= ((RealCell)grid[loca.getRow()][loca.getCol()]).getDoubleValue();
-					numberOfCells++;
-				}
+		for(int i=locCell1.getRow(); i<=locCell2.getRow();i++) {
+			for(int j=locCell1.getCol(); j<=(locCell2.getCol()); j++) {
+				sum+= ((RealCell)grid[i][j]).getDoubleValue();	
+				numberOfCells++;
 			}
+		}
 			if(formula.toLowerCase().equals("sum")) {
 				return sum;
 			} else {
