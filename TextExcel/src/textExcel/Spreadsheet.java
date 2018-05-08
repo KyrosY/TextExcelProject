@@ -1,7 +1,5 @@
 package textExcel;
 
-//
-
 public class Spreadsheet implements Grid
 {
 	//instance variables
@@ -20,6 +18,19 @@ public class Spreadsheet implements Grid
 	public String processCommand(String command){
 		String[] arr = command.split(" ", 3);
 		
+		if(arr.length == 1 && arr[0].length() > 3) {
+			return "ERROR: Needs a cell";
+		} else if(!(arr[1].equals("="))) {
+			return "ERROR:";
+		}
+		if(Integer.parseInt(arr[0].substring(1)) > 20 || Integer.parseInt(arr[0].substring(1)) < 1) {
+			return "ERROR: Row too large";
+		} else if ((int) arr[0].charAt(0) > (int) 'L') {
+			return "ERROR: Column too large";
+		} else if((int) arr[0].charAt(1) > 9) {
+			return "ERROR: Incorrect form";
+		}
+		
 		if(arr[0].toLowerCase().equals("clear")) {
 			//clear a particular cell
 			if(arr.length == 2) {
@@ -33,6 +44,7 @@ public class Spreadsheet implements Grid
 			if(arr[0].equals("")) {
 				return "";
 			}
+			
 			SpreadsheetLocation location = new SpreadsheetLocation(arr[0]);
 			//value at one cell
 			if(arr.length == 1) {	
@@ -73,8 +85,8 @@ public class Spreadsheet implements Grid
 	}
 
 	@Override
-	public String getGridText()
-	{
+	public String getGridText() {
+		
 		String gridText = "   |";
 		for (int i = 65; i <= 76; i++) {
 			gridText += (char)i + "         |";	
@@ -116,5 +128,3 @@ public class Spreadsheet implements Grid
 	}
 	
 }
-
-
